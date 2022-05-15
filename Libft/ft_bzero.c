@@ -6,11 +6,11 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:01:21 by caguerre          #+#    #+#             */
-/*   Updated: 2022/05/09 16:01:24 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:40:36 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
