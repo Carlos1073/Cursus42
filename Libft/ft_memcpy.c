@@ -6,11 +6,11 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:23:26 by caguerre          #+#    #+#             */
-/*   Updated: 2022/05/10 14:04:29 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:43:43 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
