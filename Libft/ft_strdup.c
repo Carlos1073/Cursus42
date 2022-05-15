@@ -1,35 +1,33 @@
-#include <libft.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/12 14:33:51 by caguerre          #+#    #+#             */
+/*   Updated: 2022/05/13 15:25:01 by caguerre         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static size_t calculate_lenght(char *s1)
-{
-	size_t len;
+#include "libft.h"
 
-	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	return (len);
-}
-
-char	*ft_strdup(const char s1)
+char	*ft_strdup(const char *s1)
 {
 	size_t	len;
 	char	*new;
 	int		i;
-	
-	//calcular longitud
-	len = calculate_lenght(s1);
 
-	//reservar espacio de memoria
-	new = malloc(sizeof(char) * (len));
-
-	//copiar string
+	len = ft_strlen(s1);
+	new = (char *)malloc(sizeof(char) * (len + 1));
 	i = 0;
-	while(s1[i] != '\0')
+	if (!new)
+		return (NULL);
+	while (s1[i])
 	{
-		new[i] = s1[i]
+		new[i] = s1[i];
 		i++;
 	}
 	new[i] = '\0';
 	return (new);
-
 }
