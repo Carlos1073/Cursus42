@@ -6,11 +6,11 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 12:43:30 by caguerre          #+#    #+#             */
-/*   Updated: 2022/05/09 15:43:29 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:46:04 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {
