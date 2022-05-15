@@ -6,11 +6,11 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 12:04:44 by caguerre          #+#    #+#             */
-/*   Updated: 2022/05/09 12:07:07 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:42:11 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {
