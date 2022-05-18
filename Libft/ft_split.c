@@ -1,5 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/18 16:30:33 by caguerre          #+#    #+#             */
+/*   Updated: 2022/05/18 16:30:53 by caguerre         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "libft.h"
+
+static int	ft_count_words(char const *s, char c)
+{
+	int	i;
+	int	words;
+
+	words = 0;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (i > 0 && s[i] != c && s[i - 1] == c)
+			words++;
+		if (i == 0 && s[i] != c)
+			words++;
+		i++;
+	}
+	return (words);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	int		j;
+	int		r;
+	size_t	winit;
+	char	**array;
+
+	r = ft_count_words(s, c);
+	array = (char **)malloc(sizeof (char *) * (r + 1));
+	if (!array)
+		return (NULL);
+	i = -1;
+	j = -1;
+	while (s[++i] != '\0')
+	{
+		if (i > 0 && s[i] != c && s[i - 1] == c)
+			winit = i;
+		if (i == 0 && s[0] != c)
+			winit = 0;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			array[++j] = ft_substr(s, winit, (i - winit + 1));
+	}
+	array[r] = NULL;
+	return (array);
+}
+/*
 
 static int	ft_count_words(char const *s, char c)
 {
@@ -20,41 +78,13 @@ static int	ft_count_words(char const *s, char c)
 	return (words);
 }
 
-/*static int	ft_words(char const *s, unsigned int winit, size_t wlen)
-{
-	size_t	slen;
-	char	*new;
-
-	if (!s)
-		return (NULL);
-	slen = ft_strlen(s);
-	if (wlen > (slen - winit))
-		wlen = slen - winit;
-	if (winit > slen)
-		wlen = 0;
-	new = (char *)malloc(sizeof(char) * (wlen + 1));
-	if (!new)
-		return (NULL);
-	if (wlen == 0)
-		new[0] = '\0';
-	else
-		ft_strlcpy(new, &((char *)s)[winit], wlen + 1);
-	return (new);
-}*/
-
-char	**ft_split(char const *s, char c)
+static char	ft_result(char const *s, char **array, char c)
 {
 	int		i;
 	int		j;
-	int		r;
 	size_t	winit;
 	size_t	wend;
-	char	**array;
-	
-	r = ft_count_words(s, c);
-	array = (char **)malloc(sizeof (char *) * (r + 1));
-	if (!array)
-		return (NULL);
+
 	i = 0;
 	j = 0;
 	while (s[i] != '\0')
@@ -71,6 +101,21 @@ char	**ft_split(char const *s, char c)
 		}
 		i++;
 	}
+	return (**array);
+}
+char	**ft_split(char const *s, char c)
+{
+	int		j;
+	int		r;
+	char	**array;
+	
+	j = 0;
+	r = ft_count_words(s, c);
+	array = (char **)malloc(sizeof (char *) * (r + 1));
+	if (!array)
+		return (NULL);
+	ft_result(s, array, c);
 	array[j] = NULL;
 	return (array);
 }
+*/
