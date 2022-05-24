@@ -16,7 +16,7 @@ OBJS	= $(SRCS:.c=.o)
 
 OBJSBONUS	= $(SRCSBONUS:.c=.o)
 
-SRCSBONUS	= ft_lstnew_bonus.c
+SRCSBONUS	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsiize_bonus.c ft_lstlast_bonus.c
 
 $(NAME): $(OBJS) $(HEADERS)
 		 $(AR) $(NAME) $(OBJS)
