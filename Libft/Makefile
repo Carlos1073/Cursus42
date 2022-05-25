@@ -1,8 +1,8 @@
 NAME	= libft.a
 HEADERS	= libft.h
 
-CC		= /usr/bin/gcc
-AR		= ar rcs
+CC		= gcc
+AR		= ar -rcs
 RM		= rm -f
 CFLAGS	= -Wall -Werror -Wextra
 NORM	= norminette -R CheckForbiddenSourceHeader .
@@ -12,14 +12,16 @@ SRCS	= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strle
 		  ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
 		  ft_strtrim.c ft_split.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 		  ft_striteri.c ft_strmapi.c ft_itoa.c
+
+SRCSBONUS	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsiize_bonus.c ft_lstlast_bonus.c \
+			ft_lstadd_back_bonus.c ft_lstdelone_bonus.c
+
 OBJS	= $(SRCS:.c=.o)
 
-OBJSBONUS	= $(SRCSBONUS:.c=.o)
-
-SRCSBONUS	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsiize_bonus.c ft_lstlast_bonus.c
+OBJSBONUS = $(SRCSBONUS:.c=.o)
 
 $(NAME): $(OBJS) $(HEADERS)
-		 $(AR) $(NAME) $(OBJS)
+		 $(AR) $(NAME) $(OBJS) $(HEADERS)
 
 all: $(NAME)
 
@@ -28,12 +30,13 @@ clean:
 
 norma = @$(NORM)
 
-bonus: $(OBJSBONUS) $(HEADERS)
-		@$(AR) $(NAME) $(OBJSBONUS)
+bonus: $(OBJS) $(OBJSBONUS) $(HEADERS)
+		@$(AR) $(NAME) $^
+		@touch $@
 
 fclean:	clean
 		$(RM) $(NAME)
 		$(RM) bonus
 	
-re: clean all
+re: fclean all
 
