@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 12:01:54 by caguerre          #+#    #+#             */
-/*   Updated: 2022/05/25 13:06:12 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:55:28 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
+void	ft_lstclear(t_list **lst, void (*del)(void*));
 
 #endif
