@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_printf.h"
+#include "printf.h"
 
 int	ft_print_hexaupper(unsigned long nbr)
 {
