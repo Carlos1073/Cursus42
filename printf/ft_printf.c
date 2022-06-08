@@ -1,4 +1,16 @@
-#include "lib_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/07 15:35:36 by caguerre          #+#    #+#             */
+/*   Updated: 2022/06/07 15:52:45 by caguerre         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "printf.h"
 
 static int	check_c(va_list ptr, char c)
 {
@@ -6,14 +18,14 @@ static int	check_c(va_list ptr, char c)
 		return (ft_print_char(va_arg(ptr, int)));
 	else if (c == 's')
 		return (ft_print_string(va_arg(ptr, char *)));
-//	else if (c == 'p')
-//		return (ft_print_ptr(va_arg(ptr, void *)));
-//	else if (c == 'd')
-//		
-//	else if (c == 'i')
-//		
-//	else if (c == 'u')
-//	
+	eilse if (c == 'p')
+		return (ft_print_ptr(va_arg(ptr, void *)));
+	else if (c == 'd')
+		return (ft_print_dec(va_arg(ptr, int)));
+	else if (c == 'i')
+		return (ft_print_dec(va_arg(ptr, int)));
+	else if (c == 'u')
+		return (ft_print_unsigned(va_arg(ptr, unsigned int)));
 	else if (c == 'x')
 		return (ft_print_hexa(va_arg(ptr, unsigned long)));
 	else if (c == 'X')
@@ -52,8 +64,12 @@ int	ft_printf(char const *str, ...)
 
 int	main(void)
 {
-	printf("Hello %c %s %x %X World!\n", 'd', "damn", 3456, 3456);
-	ft_printf("Hello %c %s %x %X World!\n", 'd', "damn", 3456, 3456);
+	int	original;
+	int	mio;
+
+	original = printf("Hello %c %s %d %i %x %X World!\n", 'd', "damn", 3456, 45, 3456, 3456);
+	mio = ft_printf("Hello %c %s %d %i %x %X World!\n", 'd', "damn", 3456, 45, 3456, 3456);
+	printf("%d Original - %d mio\n", original, mio);
 	return (0);	
 }
 
