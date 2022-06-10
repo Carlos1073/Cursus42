@@ -1,25 +1,13 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/08 11:07:21 by caguerre          #+#    #+#              #
-#    Updated: 2022/06/08 14:20:10 by caguerre         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # ---------------------------------- NAME ------------------------------------ #
 
 NAME		= libftprintf.a
 
 # ------------------------------- DIRECTORIES -------------------------------- #
 
-SRCS_DIR	= sources
-INC_DIR		= include
-LIBS_DIR	= libft
-OBJS_DIR	= objects
+SRCS_DIR	= sources/
+INC_DIR		= include/
+LIBS_DIR	= libft/
+OBJS_DIR	= objects/
 
 # --------------------------------- COLORS ----------------------------------- #
 
@@ -35,16 +23,15 @@ WHITE := \033[0;97m
 
 # ---------------------------------- FILES ----------------------------------- #
 
-LIBS		= $(LIBS_DIR) /libft.a
-LIBS_HDRS	= -I $(LIBS_DIR) /include/
+LIBS		= $(LIBS_DIR)libft.a
+LIBS_HDRS	= -I $(LIBS_DIR)libft.h
 
-SRCS		= ft_printf.c ft_print_char.c ft_print_dec.c ft_print_hexa.c /
-				ft_print_hexaupper.c ft_print_ptr.c ft_print_string.c /
-				ft_print_unsigned.c
+SRCS		= ft_printf.c ft_print_char.c ft_print_dec.c ft_print_hexa.c \
+			  ft_print_hexaupper.c ft_print_ptr.c ft_print_string.c ft_print_unsigned.c
 
 INCLUDE		= -I $(INC_DIR) $(LIBS_HDRS)
-DEP			= $(addsuffix .d $(basename $(OBJS)))
-OBJS 		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+OBJS 		= $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
+DEP			= $(addsuffix .d, $(basename $(OBJS)))
 
 # -------------------------------- COMPILATE --------------------------------- #
 
@@ -55,12 +42,12 @@ RM			= rm -rf
 MKDIR		= mkdir -p
 CP			= cp -f
 
-# ---------------------------------- MAKE ------------------------------------- #
+# --------------------------------- RULES ------------------------------------ #
 
-$(OBJSDIR)/%.o:$(SRCS_DIR)/%.c
+$(OBJS_DIR)%.o:$(SRCS_DIR)%.c
 			@$(MKDIR) $(dir $@)
 			@$(COMPILE) $(CFLAGS) -o $@ $<
-			@echo "$(GREEN)Compilando archivos... $ˆ $(DEF_COLOR)"
+			@echo "$(GREEN)Compilando archivos... $^ $(DEF_COLOR)"
 
 all:		make_libs $(NAME)
 
@@ -68,16 +55,17 @@ make_libs:
 			@make -s -C $(LIBS_DIR)
 
 -include %(DEP)
-$(NAME):	$(OBJS) $(LIBS)
+$(NAME):	$(OBJS)
 			@$(CP) $(LIBS) ./$(NAME)
-			@$(LIBC) $(NAME) $(OBJS)
+			@$(AR) $(NAME) $(OBJS)
 			@echo "$(GREEN)Creando libreria... $(NAME) $(DEF_COLOR)"
 
-clean:		@make clean -s -C $(LIBS_DIR)
+clean:		
+			@make clean -s -C $(LIBS_DIR)
 			@$(RM) $(OBJS)
 			@$(RM) $(DEP)
 			@$(RM) $(OBJS_DIR)
-			@echo "$(RED)Borrando objetos... $(DEF_COLOR)
+			@echo "$(RED)Borrando objetos... $(DEF_COLOR)"
 
 fclean:		clean
 			@make fclean -s -C $(LIBS_DIR)
@@ -86,4 +74,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY		all clean fclean re make_libs
+.PHONY:		all clean fclean re make_libs
