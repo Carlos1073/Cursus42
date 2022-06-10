@@ -5,24 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 12:19:11 by caguerre          #+#    #+#             */
-/*   Updated: 2022/06/07 12:21:22 by caguerre         ###   ########.fr       */
+/*   Created: 2022/06/10 12:04:45 by caguerre          #+#    #+#             */
+/*   Updated: 2022/06/10 12:05:18 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "../include/printf.h"
 
-int	ft_print_dec(unsigned long nbr)
+int	ft_print_dec(int nbr)
 {
-	int	len;
+	int		len;
+	char	*num;
 
 	len = 0;
-	if (nbr >= 10)
-	{
-		len += ft_print_dec(nbr / 10);
-		len += ft_print_dec(nbr % 10);
-	}
-	else
-		len += write(1, &"0123456789abcdef"[nbr], 1);
+	num = ft_itoa(nbr);
+	len = ft_print_string(num);
+	free(num);
 	return (len);
 }
