@@ -5,38 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 14:47:08 by caguerre          #+#    #+#             */
-/*   Updated: 2022/06/07 15:18:14 by caguerre         ###   ########.fr       */
+/*   Created: 2022/06/10 12:28:51 by caguerre          #+#    #+#             */
+/*   Updated: 2022/06/10 16:28:56 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "../include/printf.h"
 
-int	ft_nbrlen(size_t nbr)
+int	ft_nlen(unsigned int n)
 {
 	int	len;
 
 	len = 0;
-	if (nbr <= 0)
-		len++;
-	while (nbr)
+	while (n != 0)
 	{
-		nbr /= 10;
 		len++;
+		n = n / 10;
 	}
 	return (len);
 }
 
+char	*ft_uitoa(unsigned int n)
+{
+	int		len;
+	char	*num;
+
+	len = ft_nlen(n);
+	num = (char *)malloc(sizeof(char) * (len + 1));
+	if (!num)
+		return (NULL);
+	num[len] = '\0';
+	while (n != 0)
+	{
+		num[len - 1] = n % 10 + '0';
+		n = n / 10;
+		len--;
+	}
+	return (num);
+}
+
 int	ft_print_unsigned(unsigned int nbr)
 {
-	if (nbr <= UINT_MAX)
+	int		len;
+	char	*num;
+
+	len = 0;
+	if (nbr == 0)
+		len += write(1, "0", 1);
+	else
 	{
-		if (nbr >= 10)
-		{
-			ft_print_unsigned (nbr / 10);
-			ft_print_unsigned (nbr % 10);
-		}
-		else
-			ft_print_char(nbr, "0");
-	return (ft_nbrlen(nbr));
+		num = ft_uitoa(nbr);
+		len += ft_print_string(num);
+		free(num);
+	}
+	return (len);
 }
