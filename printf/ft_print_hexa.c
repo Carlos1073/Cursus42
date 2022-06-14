@@ -6,13 +6,13 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 13:23:52 by caguerre          #+#    #+#             */
-/*   Updated: 2022/06/01 15:27:52 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:18:49 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "../include/ft_printf.h"
 
-int	ft_print_hexa(unsigned long nbr)
+int	ft_print_hexa(unsigned int nbr)
 {
 	int	len;
 
