@@ -6,20 +6,27 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 12:04:45 by caguerre          #+#    #+#             */
-/*   Updated: 2022/06/10 12:05:18 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:43:36 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/printf.h"
+#include "../include/ft_printf.h"
 
 int	ft_print_dec(int nbr)
 {
-	int		len;
+	int		i;
 	char	*num;
 
-	len = 0;
+	i = 0;
 	num = ft_itoa(nbr);
-	len = ft_print_string(num);
+	if (num == NULL)
+		return (write(1, "(null)", 6));
+	while (num[i])
+	{
+		if (write(1, &num[i], 1) == -1)
+			return (-1);
+		i++;
+	}
 	free(num);
-	return (len);
+	return (i);
 }
