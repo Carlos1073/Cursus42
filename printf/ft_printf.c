@@ -40,6 +40,7 @@ int	ft_printf(char const *str, ...)
 	va_list	ptr;
 	int		lenght;
 	int		i;
+	int		test;
 
 	lenght = 0;
 	i = 0;
@@ -48,7 +49,11 @@ int	ft_printf(char const *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			lenght += check_c(ptr, str[i + 1]);
+			test = check_c(ptr, str[i + 1]);
+			if (test == -1)
+				return (-1);
+			else
+				lenght += test;
 			i++;
 		}
 		else
