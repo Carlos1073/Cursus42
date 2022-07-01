@@ -6,14 +6,14 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:04:07 by caguerre          #+#    #+#             */
-/*   Updated: 2022/07/01 18:10:23 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/07/01 18:47:01 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 // Reservamos memoria para el buffer, Usamos READ para leer el archivo
-// y concatenamos strings. Devolvemos el STORAGE con las cadenas unidas.
+// y concatenamos strings. Devolvemos STORAGE con las cadenas unidas.
 // 
 char	*ft_read_save(int fd, char *storage)
 {
