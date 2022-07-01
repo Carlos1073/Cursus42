@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:48:15 by caguerre          #+#    #+#             */
-/*   Updated: 2022/07/01 16:49:06 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/07/01 18:26:26 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	newlen;
 
 	newlen = ft_strlen(s1) + ft_strlen(s2);
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
+	}	
 	new = (char *)malloc(sizeof(char) * (newlen + 1));
 	if (!new)
 		return (NULL);
@@ -51,6 +56,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[++j])
 		new[i + j] = s2[j];
 	new[i + j] = '\0';
+	free(s1);
 	return (new);
 }
 
@@ -78,7 +84,7 @@ char	*ft_strdup(char *s1)
 	new = (char *)malloc(sizeof(char) * (len + 1));
 	i = 0;
 	if (!new)
-		return (NULL);
+		return (NULL)i;
 	while (s1[i])
 	{
 		new[i] = s1[i];
