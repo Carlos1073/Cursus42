@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:04:07 by caguerre          #+#    #+#             */
-/*   Updated: 2022/07/01 17:47:37 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/07/01 18:10:23 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*ft_read_save(int fd, char *storage)
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
+	buff[0] = '\0';
 	reading = 1;
 	while (!ft_strchr(storage, '\n') && reading != 0)
 	{
