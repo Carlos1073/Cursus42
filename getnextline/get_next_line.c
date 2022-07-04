@@ -14,7 +14,7 @@
 
 // Reservamos memoria para el buffer, Usamos READ para leer el archivo
 // y concatenamos strings. Devolvemos STORAGE con las cadenas unidas.
-// 
+//
 char	*ft_read_save(int fd, char *storage)
 {
 	char	*buff;
@@ -31,6 +31,7 @@ char	*ft_read_save(int fd, char *storage)
 		if (reading == -1)
 		{
 			free(buff);
+			free(storage);
 			return (NULL);
 		}
 		buff[reading] = '\0';
@@ -85,22 +86,31 @@ char	*ft_save(char *storage)
 	size_t	len_storage;
 
 	i = 0;
-	while (storage[i] && (storage[i] != '\n'))
-		i++;
 	if (!storage)
 	{
 		free (storage);
 		return (NULL);
 	}
-	len_storage = ft_strlen(storage);
-	str = (char *)malloc(sizeof (char) * (len_storage - i + 1));
-	if (!str)
+	while (storage[i] && (storage[i] != '\n'))
+		i++;
+	if (storage[i] == '\0')
+	{
+		free(storage);
 		return (NULL);
+	}
+	len_storage = ft_strlen(storage);
+	str = (char *)malloc(sizeof(char) * (len_storage - i + 1));
+	if (!str)
+	{
+		free(storage);
+		return (NULL);
+	}
 	i++;
 	c = 0;
 	while (storage[i])
 		str[c++] = storage[i++];
 	str[c] = '\0';
+	free(storage);
 	return (str);
 }
 
@@ -114,7 +124,11 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!storage)
+	{
 		storage = ft_strdup("");
+		if (!storage)
+			return (NULL);
+	}
 	storage = ft_read_save(fd, storage);
 	if (!storage)
 		return (NULL);
@@ -123,22 +137,23 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// Main
-//
-//int main(void)
-//{
+//Main
+
+// int main(void)
+// {
 //    int     fd;
-//    char    *line;	
-//
+//    char    *line;
+
 //    fd = open("test", O_RDONLY);
-//	printf("main fd = %d\n", fd);
-//	line = get_next_line(fd);
-//	printf("main line = %s", line);
-//*	while (line)
-//    {
-//        free(line); 
-//		line = get_next_line(fd);
-//        printf("%s", line);
-//		}
-//    return (0);
-//}
+// 	printf("main fd = %d\n", fd);
+// 	line = get_next_line(fd);
+// //	free(line);
+// 	printf("main line = %s", line);
+// 	while (line)
+// 	{
+//     	free(line);
+// 		line = get_next_line(fd);
+//     	printf("%s", line);
+// 	}
+// 	return (0);
+// }
