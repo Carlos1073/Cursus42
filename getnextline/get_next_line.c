@@ -83,7 +83,6 @@ char	*ft_save(char *storage)
 	int		i;
 	int		c;
 	char	*str;
-	size_t	len_storage;
 
 	i = 0;
 	if (!storage)
@@ -98,13 +97,7 @@ char	*ft_save(char *storage)
 		free(storage);
 		return (NULL);
 	}
-	len_storage = ft_strlen(storage);
-	str = (char *)malloc(sizeof(char) * (len_storage - i + 1));
-	if (!str)
-	{
-		free(storage);
-		return (NULL);
-	}
+	str = (char *)malloc(sizeof(char) * (ft_strlen(storage) - i + 1));
 	i++;
 	c = 0;
 	while (storage[i])
