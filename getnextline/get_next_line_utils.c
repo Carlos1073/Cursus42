@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 16:48:15 by caguerre          #+#    #+#             */
-/*   Updated: 2022/07/01 18:26:26 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/07/01 18:51:12 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ char	*ft_strdup(char *s1)
 	char	*new;
 	int		i;
 
+	i = 0;
 	len = ft_strlen(s1);
 	new = (char *)malloc(sizeof(char) * (len + 1));
-	i = 0;
 	if (!new)
-		return (NULL)i;
+		return (NULL);
 	while (s1[i])
 	{
 		new[i] = s1[i];
