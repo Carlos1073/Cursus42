@@ -12,24 +12,22 @@
 
 #include "../include/ft_printf.h"
 
-static int	check_c(va_list ptr, char c)
+static int	check_c(va_list args, char c)
 {
 	if (c == 'c')
-		return (ft_print_char(va_arg(ptr, int)));
+		return (ft_print_char(va_arg(args, int)));
 	else if (c == 's')
-		return (ft_print_string(va_arg(ptr, char *)));
+		return (ft_print_string(va_arg(args, char *)));
 	else if (c == 'p')
-		return (ft_print_ptr(va_arg(ptr, unsigned long long)));
-	else if (c == 'd')
-		return (ft_print_dec(va_arg(ptr, int)));
-	else if (c == 'i')
-		return (ft_print_dec(va_arg(ptr, int)));
+		return (ft_print_ptr(va_arg(args, unsigned long long)));
+	else if (c == 'd' || c == 'i')
+		return (ft_print_dec(va_arg(args, int)));
 	else if (c == 'u')
-		return (ft_print_unsigned(va_arg(ptr, unsigned int)));
+		return (ft_print_unsigned(va_arg(args, unsigned int)));
 	else if (c == 'x')
-		return (ft_print_hexa(va_arg(ptr, unsigned int)));
+		return (ft_print_hexa(va_arg(args, unsigned int), "0123456789abcdef"));
 	else if (c == 'X')
-		return (ft_print_hexaupper(va_arg(ptr, unsigned int)));
+		return (ft_print_hexa(va_arg(args, unsigned int), "0123456789ABCDEF"));
 	else if (c == '%')
 		return (ft_print_char('%'));
 	return (0);
@@ -37,19 +35,19 @@ static int	check_c(va_list ptr, char c)
 
 int	ft_printf(char const *str, ...)
 {
-	va_list	ptr;
+	va_list	args;
 	int		lenght;
 	int		i;
 	int		test;
 
 	lenght = 0;
 	i = 0;
-	va_start(ptr, str);
+	va_start(args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			test = check_c(ptr, str[i + 1]);
+			test = check_c(args, str[i + 1]);
 			if (test == -1)
 				return (-1);
 			else
@@ -57,9 +55,13 @@ int	ft_printf(char const *str, ...)
 			i++;
 		}
 		else
+		{
 			lenght += ft_print_char(str[i]);
+			if (lenght == -1)
+				return (-1);
+		}
 		i++;
 	}
-	va_end(ptr);
+	va_end(args);
 	return (lenght);
 }
