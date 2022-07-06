@@ -21,8 +21,7 @@ int	ft_printf(char const *str, ...);
 int	ft_print_char(int c);
 int	ft_print_string(char *s);
 int	ft_print_ptr(unsigned long long nbr);
-int	ft_print_hexa(unsigned int nbr);
-int	ft_print_hexaupper(unsigned int nbr);
+int	ft_print_hexa(unsigned long int nbr, char *base);
 int	ft_print_dec(int nbr);
 int	ft_print_unsigned(unsigned int nbr);
 
