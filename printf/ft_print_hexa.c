@@ -12,17 +12,54 @@
 
 #include "../include/ft_printf.h"
 
-int	ft_print_hexa(unsigned int nbr)
+static int	ft_putchar(char c)
 {
-	int	len;
+	if (write(1, &c, sizeof(char)) != sizeof(char))
+		return (-1);
+	return (1);
+}
 
-	len = 0;
-	if (nbr >= 16)
+static int	ft_putnbrbase(unsigned long long nbr, char *base)
+{
+	int	char_count;
+
+	char_count = 0;
+	if (nbr < 0)
 	{
-		len += ft_print_hexa(nbr / 16);
-		len += ft_print_hexa(nbr % 16);
+		nbr = nbr * -1;
+		if (ft_putchar('-') == -1)
+			return (-1);
+		char_count++;
 	}
-	else
-		len += write(1, &"0123456789abcdef"[nbr], 1);
-	return (len);
+	if (nbr > (unsigned long long)ft_strlen(base) - 1)
+		char_count += ft_putnbrbase(nbr / ft_strlen(base), base);
+	if (char_count == -1)
+		return (-1);
+	if (ft_putchar(base[nbr % ft_strlen(base)]) == -1)
+		return (-1);
+	char_count++;
+	return (char_count);
+}
+
+int	ft_print_hexa(unsigned long int nbr, char *base)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (base[++i] != '\0')
+	{
+		j = 1;
+		if (base[i] == '-' || base[i] == '+')
+			return (0);
+		while (base[i + j] != '\0')
+		{
+			if (base[i + j] == base[i])
+				return (0);
+			j++;
+		}
+	}
+	if (i <= 1)
+		return (0);
+	return (ft_putnbrbase(nbr, base));
 }
