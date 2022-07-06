@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/printf.h"
+#include "../include/ft_printf.h"
 
-int	ft_nlen(unsigned int n)
+static int	ft_nlen(unsigned int n)
 {
 	int	len;
 
@@ -25,7 +25,7 @@ int	ft_nlen(unsigned int n)
 	return (len);
 }
 
-char	*ft_uitoa(unsigned int n)
+static char	*ft_uitoa(unsigned int n)
 {
 	int		len;
 	char	*num;
@@ -55,6 +55,8 @@ int	ft_print_unsigned(unsigned int nbr)
 	else
 	{
 		num = ft_uitoa(nbr);
+		if (num <= 0)
+			return (-1);
 		len += ft_print_string(num);
 		free(num);
 	}
