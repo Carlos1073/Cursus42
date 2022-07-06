@@ -12,21 +12,37 @@
 
 #include "../include/ft_printf.h"
 
+static int	ft_putchar(char c)
+{
+	if (write(1, &c, sizeof(char)) != sizeof(char))
+		return (-1);
+	return (1);
+}
+
 int	ft_print_dec(int nbr)
 {
-	int		i;
-	char	*num;
+	int						printed;
+	unsigned long long int	number;
 
-	i = 0;
-	num = ft_itoa(nbr);
-	if (num == NULL)
-		return (write(1, "(null)", 6));
-	while (num[i])
+	printed = 0;
+	number = nbr;
+	if (nbr < 0)
 	{
-		if (write(1, &num[i], 1) == -1)
+		number = -number;
+		printed += ft_putchar('-');
+		if (printed == -1)
 			return (-1);
-		i++;
 	}
-	free(num);
-	return (i);
+	if (number >= 10)
+	{
+		printed += ft_print_dec(number / 10);
+		if (printed == -1)
+			return (-1);
+		printed += ft_print_dec(number % 10);
+	}
+	else
+		printed += ft_putchar(number + '0');
+	if (printed == -1)
+		return (-1);
+	return (printed);
 }
