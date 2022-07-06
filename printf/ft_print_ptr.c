@@ -12,49 +12,65 @@
 
 #include "../include/ft_printf.h"
 
-static void	ft_putchar(char c)
+int	ft_putchar(char c, int fd)
 {
-	write(1, &c, 1);
+	if (write(fd, &c, sizeof(char)) != sizeof(char))
+		return (-1);
+	return (1);
 }
 
-static int	ft_ptrlen(unsigned long long nbr)
+int	ft_ptr_len(uintptr_t num)
 {
 	int	len;
 
 	len = 0;
-	while (nbr != 0)
+	while (num != 0)
 	{
-		nbr /= 16;
 		len++;
+		num = num / 16;
 	}
 	return (len);
 }
 
-static void	ft_ptrcon(unsigned long long nbr)
+int	ft_put_ptr(uintptr_t num)
 {
-	if (nbr >= 16)
+	if (num >= 16)
 	{
-		ft_ptrcon(nbr / 16);
-		ft_ptrcon(nbr % 16);
+		ft_put_ptr(num / 16);
+		ft_put_ptr(num % 16);
 	}
 	else
 	{
-		if (nbr <= 9)
-			ft_putchar(nbr + '0');
-		else
-			ft_putchar(nbr - 10 + 'a');
+		if (num <= 9)
+		{
+			if (ft_putchar((num + '0'), 1) == -1)
+				return (-1);
+		}
+		else if (ft_putchar((num - 10 + 'a'), 1) == -1)
+			return (-1);
 	}
+	return (0);
 }
 
-int	ft_print_ptr(unsigned long long nbr)
+int	ft_print_ptr(unsigned long long ptr)
 {
-	int		len;
+	int	print_lenght;
 
-	len = 0;
-	write(1, "0x", 2);
-	if (nbr == 0)
-		return (write(1, "0", 1) + 2);
+	print_lenght = 0;
+	print_lenght += write(1, "0x", 2);
+	if (print_lenght == -1)
+		return (-1);
+	if (ptr == 0)
+		print_lenght += write(1, "0", 1);
+	if (print_lenght == -1)
+		return (-1);
 	else
-		ft_ptrcon(nbr);
-	return (ft_ptrlen(nbr) + 2);
+	{
+		if ((ft_put_ptr(ptr)) == -1)
+			return (-1);
+		print_lenght += ft_ptr_len(ptr);
+		if (print_lenght == -1)
+			return (-1);
+	}
+	return (print_lenght);
 }
