@@ -12,65 +12,38 @@
 
 #include "../include/ft_printf.h"
 
-int	ft_putchar(char c, int fd)
+static int	ft_putchar(char c)
 {
-	if (write(fd, &c, sizeof(char)) != sizeof(char))
+	if (write(1, &c, sizeof(char)) != sizeof(char))
 		return (-1);
 	return (1);
 }
 
-int	ft_ptr_len(uintptr_t num)
+static int	ft_hexaux(size_t nb, char *base)
 {
-	int	len;
+	int	count;
 
-	len = 0;
-	while (num != 0)
-	{
-		len++;
-		num = num / 16;
-	}
-	return (len);
+	count = 0;
+	if (nb >= 16)
+		count += ft_hexaux(nb / 16, base);
+	if (count == -1)
+		return (-1);
+	count += ft_putchar((char)(base[nb % 16]));
+	if (count == -1)
+		return (-1);
+	return (count);
 }
 
-int	ft_put_ptr(uintptr_t num)
+int	ft_print_ptr(void *ptr)
 {
-	if (num >= 16)
-	{
-		ft_put_ptr(num / 16);
-		ft_put_ptr(num % 16);
-	}
-	else
-	{
-		if (num <= 9)
-		{
-			if (ft_putchar((num + '0'), 1) == -1)
-				return (-1);
-		}
-		else if (ft_putchar((num - 10 + 'a'), 1) == -1)
-			return (-1);
-	}
-	return (0);
-}
+	int	count;
 
-int	ft_print_ptr(unsigned long long ptr)
-{
-	int	print_lenght;
-
-	print_lenght = 0;
-	print_lenght += write(1, "0x", 2);
-	if (print_lenght == -1)
+	count = 0;
+	count += write (1, "0x", 2);
+	if (count == -1)
 		return (-1);
-	if (ptr == 0)
-		print_lenght += write(1, "0", 1);
-	if (print_lenght == -1)
+	count += ft_hexaux((size_t)ptr, "0123456789abcdef");
+	if (count == -1)
 		return (-1);
-	else
-	{
-		if ((ft_put_ptr(ptr)) == -1)
-			return (-1);
-		print_lenght += ft_ptr_len(ptr);
-		if (print_lenght == -1)
-			return (-1);
-	}
-	return (print_lenght);
+	return (count);
 }

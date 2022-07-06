@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 12:36:58 by caguerre          #+#    #+#             */
-/*   Updated: 2022/06/13 12:37:08 by caguerre         ###   ########.fr       */
+/*   Created: 2022/05/18 17:37:37 by caguerre          #+#    #+#             */
+/*   Updated: 2022/05/18 18:02:59 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdarg.h>
-# include <limits.h>
-# include "../libft/libft.h"
+void	ft_putstr_fd(char *s, int fd)
+{	
+	int	i;
 
-int	ft_printf(char const *str, ...);
-int	ft_print_char(int c);
-int	ft_print_string(char *s);
-int	ft_print_ptr(unsigned long long nbr);
-int	ft_print_hexa(unsigned long int nbr, char *base);
-int	ft_print_dec(int nbr);
-int	ft_print_unsigned(unsigned int nbr);
-
-#endif
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+	i++;
+	}
+}

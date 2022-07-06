@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hexaupper.c                               :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/01 13:26:06 by caguerre          #+#    #+#             */
-/*   Updated: 2022/06/09 14:19:04 by caguerre         ###   ########.fr       */
+/*   Created: 2022/05/13 15:58:38 by caguerre          #+#    #+#             */
+/*   Updated: 2022/05/13 16:04:55 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "libft.h"
 
-int	ft_print_hexaupper(unsigned int nbr)
+char	*ft_strchr(const char *s, int c)
 {
-	int	len;
-
-	len = 0;
-	if (nbr >= 16)
+	while (*s)
 	{
-		len += ft_print_hexaupper(nbr / 16);
-		len += ft_print_hexaupper(nbr % 16);
+		if (*s == (unsigned char)c)
+			return ((char *)s);
+		s++;
 	}
-	else
-		len += write(1, &"0123456789ABCDEF"[nbr], 1);
-	return (len);
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }

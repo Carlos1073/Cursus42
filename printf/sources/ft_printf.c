@@ -19,7 +19,7 @@ static int	check_c(va_list args, char c)
 	else if (c == 's')
 		return (ft_print_string(va_arg(args, char *)));
 	else if (c == 'p')
-		return (ft_print_ptr(va_arg(args, unsigned long long)));
+		return (ft_print_ptr(va_arg(args, void *)));
 	else if (c == 'd' || c == 'i')
 		return (ft_print_dec(va_arg(args, int)));
 	else if (c == 'u')
@@ -33,16 +33,11 @@ static int	check_c(va_list args, char c)
 	return (0);
 }
 
-int	ft_printf(char const *str, ...)
+static int	ft_check(char const *str, int i, int lenght, va_list args)
 {
-	va_list	args;
-	int		lenght;
-	int		i;
-	int		test;
+	int	test;
 
-	lenght = 0;
-	i = 0;
-	va_start(args, str);
+	test = 0;
 	while (str[i])
 	{
 		if (str[i] == '%')
@@ -62,6 +57,19 @@ int	ft_printf(char const *str, ...)
 		}
 		i++;
 	}
+	return (lenght);
+}
+
+int	ft_printf(char const *str, ...)
+{
+	va_list	args;
+	int		lenght;
+	int		i;
+
+	lenght = 0;
+	i = 0;
+	va_start(args, str);
+	lenght = ft_check(str, i, lenght, args);
 	va_end(args);
 	return (lenght);
 }

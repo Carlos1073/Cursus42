@@ -27,7 +27,7 @@ LIBS		= $(LIBS_DIR)libft.a
 LIBS_HDRS	= -I $(LIBS_DIR)libft.h
 
 SRCS		= ft_printf.c ft_print_char.c ft_print_dec.c ft_print_hexa.c \
-			  ft_print_hexaupper.c ft_print_ptr.c ft_print_string.c ft_print_unsigned.c
+			  ft_print_ptr.c ft_print_string.c ft_print_unsigned.c
 
 INCLUDE		= -I $(INC_DIR) $(LIBS_HDRS)
 OBJS 		= $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
