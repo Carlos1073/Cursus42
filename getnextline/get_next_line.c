@@ -111,22 +111,22 @@ char	*ft_save(char *storage)
 //
 char	*get_next_line(int fd)
 {
-	static char	*storage;
+	static char	*storage[256];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!storage)
+	if (!storage[fd])
 	{
-		storage = ft_strdup("");
-		if (!storage)
+		storage[fd] = ft_strdup("");
+		if (!storage[fd])
 			return (NULL);
 	}
-	storage = ft_read_save(fd, storage);
-	if (!storage)
+	storage[fd] = ft_read_save(fd, storage[fd]);
+	if (!storage[fd])
 		return (NULL);
-	line = ft_get_line(storage);
-	storage = ft_save(storage);
+	line = ft_get_line(storage[fd]);
+	storage[fd] = ft_save(storage[fd]);
 	return (line);
 }
 
