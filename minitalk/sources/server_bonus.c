@@ -12,9 +12,13 @@
 
 #include "minitalk.h"
 
-static int	ft_putchar(char c)
+static void	ft_errors(int i)
 {
-	return (write(1, &c, 1));
+	if (i == ERROR_0)
+		ft_printf("Error!\n");
+	else if (i == ERROR_2)
+		ft_printf("PID is invalid!");
+	exit(EXIT_FAILURE);
 }
 
 static void	decode(int sig, siginfo_t *info, void *context)
@@ -25,17 +29,20 @@ static void	decode(int sig, siginfo_t *info, void *context)
 	(void)context;
 	if (sig == SIGUSR2)
 		c = c | 128 >> count;
-	kill(info->si_pid, SIGUSR2);
+	if (kill(info->si_pid, SIGUSR2) == -1)
+		ft_errors(ERROR_0);
 	count++;
 	if (count == 8)
 	{
 		if (c == '\0')
 		{
-			ft_putchar('\n');
-			kill(info->si_pid, SIGUSR1);
+			ft_simpletxt('\n');
+			if (kill(info->si_pid, SIGUSR1) == -1)
+				ft_errors(ERROR_0);
 		}
 		else
-			kill(info->si_pid, SIGUSR2);
+			if (kill(info->si_pid, SIGUSR2) == -1)
+				ft_errors(ERROR_0);
 		write(1, &c, 1);
 		c = 0;
 		count = 0;
@@ -49,6 +56,8 @@ int	main(void)
 	pid_t				pid;
 
 	pid = getpid();
+	if (!pid)
+		ft_errors(ERROR_2);
 	ft_printf("PID is: %d\n", (int)pid);
 	sig1.sa_flags = SA_SIGINFO;
 	sig1.sa_sigaction = decode;

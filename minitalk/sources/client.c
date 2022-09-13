@@ -12,9 +12,13 @@
 
 #include "minitalk.h"
 
-static int	ft_putchar(char c)
+static void	ft_errors(int i)
 {
-	return (write(1, &c, 1));
+	if (i == ERROR_0)
+		ft_printf("Error!\n");
+	else if (i == ERROR_1)
+		ft_printf("Invalid parameters!");
+	exit(EXIT_FAILURE);
 }
 
 static void	decode(unsigned char c, pid_t pid)
@@ -28,13 +32,15 @@ static void	decode(unsigned char c, pid_t pid)
 	{
 		if (c < base)
 		{
-			ft_putchar('0');
-			kill(pid, SIGUSR1);
+			ft_simpletxt('0');
+			if (kill(pid, SIGUSR1) == -1)
+				ft_errors(ERROR_0);
 		}
 		else
 		{
-			ft_putchar('1');
-			kill(pid, SIGUSR2);
+			ft_simpletxt('1');
+			if (kill(pid, SIGUSR2) == -1)
+				ft_errors(ERROR_0);
 			c = c - base;
 		}
 		base = base / 2;
@@ -55,10 +61,12 @@ int	main(int args, char **argv)
 		while (argv[2][count])
 		{
 			decode(argv[2][count], srv_pid);
-			ft_putchar('\n');
+			ft_simpletxt('\n');
 			count++;
 		}
 		decode('\n', srv_pid);
 	}
+	else
+		ft_errors(ERROR_1);
 	return (0);
 }
