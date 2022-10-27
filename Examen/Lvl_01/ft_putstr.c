@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 09:54:40 by caguerre          #+#    #+#             */
-/*   Updated: 2022/07/19 09:57:40 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:13:39 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,12 @@ void	ft_putstr(char *str)
 		i++;
 	}
 }
+
+int	main(void)
+{
+	char *str;
+
+	str = "Hola que tal";
+	ft_putstr(str);
+}
+

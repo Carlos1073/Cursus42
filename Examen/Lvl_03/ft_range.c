@@ -13,46 +13,38 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int	ft_abs_val(int nbr)
-{
-	if (nbr < 0)
-		return (-nbr);
-	return (nbr);
-}
-
 int	*ft_range(int start, int end)
 {
-	int	size;
 	int	*ptr;
-	int	*tmp;
+	int	len;
 
-	size = end - start;
-	if (!size)
-		return (NULL);
-	ptr = (int *) malloc(sizeof(int) * size);
+	if (start > end)
+		len = start - end;
+	else
+		len = end - start;
+	ptr = malloc(sizeof(int) * len + 1);
 	if (!ptr)
 		return (NULL);
-	tmp = ptr;
-	while (start <= end)
-		*ptr++ = start++;
-	return (tmp);
+	while (len >= 0)
+	{
+		ptr[len] = end;
+		if (start > end)
+			end++;
+		else
+			end--;
+		len--;
+	}
+	return (ptr);
 }
 
 int	main(void)
 {
-	int	start;
-	int	end;
-	int	*array;
 	int	i;
+	int	*ptr;
 
-	start = -2;
-	end = 3;
 	i = 0;
-	array = ft_range(start, end);
-	while (i < 1 + ft_abs_val(end - start))
-	{
-		printf("%d, ", array[i]);
-		i++;
-	}
-	printf("\n");
+	ptr = ft_range(-3, 3);
+	while (ptr[i] != '\0')
+		printf("%i\n", ptr[i++]);
+	return (0);
 }

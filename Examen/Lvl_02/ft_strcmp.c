@@ -6,11 +6,12 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 12:52:50 by caguerre          #+#    #+#             */
-/*   Updated: 2022/07/20 12:52:53 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:28:46 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 
 int    ft_strcmp(char *s1, char *s2)
 {
@@ -21,3 +22,5 @@ int    ft_strcmp(char *s1, char *s2)
 		i++;
 	return (s1[i] - s2[i]);
 }
+
+

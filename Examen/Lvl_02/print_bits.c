@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:50:44 by caguerre          #+#    #+#             */
-/*   Updated: 2022/07/21 16:57:41 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:08:08 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	print_bits(unsigned char octet)
 {
-	int				len;
-	unsigned char	i;
-	char			res;
+	int	i;
 
-	len = 8;
-	i = 1;
-	while (len-- > 0)
+	i = 128;
+	while (i > 0)
 	{
-		res = ((octet >> len) & i) + '0';
-		write(1, &res, 1);
+		if (i & octet)
+			write(1, "1", 1);
+		else
+			write(1, "0", 1);
+		i >>= 1;
 	}
 }
 

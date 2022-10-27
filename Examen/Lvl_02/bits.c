@@ -21,7 +21,7 @@ c = 10010010
 char a = 'b'
 b= 01011000
 
-//Acemos un and binario entre c y a
+//Hacemos un and binario entre c y a
 c = c & a
 
 c = 10010010
@@ -29,7 +29,7 @@ b = 01011000
 ____________
 c = 00010000 	
 
-//Acemos un or binario
+//Hacemos un or binario
 
 c = c | b
 

@@ -31,14 +31,16 @@ int	ft_count(char c)
 
 int	main(int argc, char **argv)
 {
+	int	i;
 	int	repeat;
 	
+	i = 0;
 	if (argc == 2)
-		while (*argv[1])
+		while (argv[1][i])
 		{
-			repeat = ft_count(*argv[1]);
+			repeat = ft_count(argv[1][i]);
 			while (repeat--)
-				write(1, argv[1], 1);
+				write(1, &argv[1][i], 1);
 			argv[1]++;
 		}
 	ft_putchar('\n');
