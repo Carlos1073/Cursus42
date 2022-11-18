@@ -33,8 +33,8 @@ static int  move_up(t_game *game, int movement)
             return (0);
         game->map[y + 1][x] = '0';
     }
-    ft_printf("Movements: %i\n", game->counter);
-    ft_printf("Collectables left: %i\n", game->collectables);
+    ft_printf("\rMovements: %i", game->counter);
+    // ft_printf("\rCollectables left: %i\n", game->collectables);
     return (1);
 }
 
@@ -59,8 +59,8 @@ static int  move_down(t_game *game, int movement)
             return (0);
         game->map[y - 1][x] = '0';
     }
-    ft_printf("Movements: %i\n", game->counter);
-    ft_printf("Collectables left: %i\n", game->collectables);
+    ft_printf("\rMovements: %i", game->counter);
+    // ft_printf("\rCollectables left: %i\n", game->collectables);
     return (1);
 }
 
@@ -85,8 +85,8 @@ static int  move_left(t_game *game, int movement)
             return (0);
         game->map[y][x + 1] = '0';
     }
-    ft_printf("Movements: %i\n", game->counter);
-    ft_printf("Collectables left: %i\n", game->collectables);
+    ft_printf("\rMovements: %i", game->counter);
+    // ft_printf("\rCollectables left: %i\n", game->collectables);
     return (1);
 }
 
@@ -111,8 +111,8 @@ static int  move_right(t_game *game, int movement)
             return (0);
         game->map[y][x - 1] = '0';
     }
-    ft_printf("Movements: %i\n", game->counter);
-    ft_printf("Collectables left: %i\n", game->collectables);
+    ft_printf("\rMovements: %i", game->counter);
+    // ft_printf("\rCollectables left: %i\n", game->collectables);
     return (1);
 }
 
