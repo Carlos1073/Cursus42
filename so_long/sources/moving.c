@@ -21,7 +21,7 @@ int  correct_move(t_game *game, int x, int y)
     {
         if (game->collectables != 0)
             return (0);
-        ft_printf("You have won the game!\n");
+        ft_printf("\nYou have won the game!\n");
             exit_game(game);
     }
     if (game->map[y][x] == '0')
