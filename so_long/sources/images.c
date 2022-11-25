@@ -14,7 +14,20 @@
 
 void    put_player(t_game *game, int height, int width)
 {
-    mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->indy_s,
+    if (game->keymove == 1)
+        mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->indy_w,
+				width * 50, height * 50);
+    if (game->keymove == 2)
+        mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->indy_s,
+				width * 50, height * 50);
+    if (game->keymove == 3)
+        mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->indy_a,
+				width * 50, height * 50);
+    if (game->keymove == 4)
+        mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->indy_d,
+				width * 50, height * 50);
+    if (!game->keymove)
+        mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->indy_s,
 				width * 50, height * 50);
     game->player_x = width;
     game->player_y = height;
