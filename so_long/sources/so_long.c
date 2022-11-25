@@ -14,7 +14,6 @@
 
 // Esta función verifica que el mapa tiene la extension BER
 //
-// int	check_extension(t_game *game, char *filename)
 int	check_extension(char *filename)
 {
 	size_t	len;
@@ -46,12 +45,17 @@ int	exit_game(t_game *game)
 
 // Con esta función hacemos el check del mapa, para saber si los muros están
 // perfectamente cerrados y si están todos los items que requiere el juego 
-// para poder funcionar
+// para poder funcionar. Luego localizamos la posición del Player y hacemos 
+// una copia del mapa para verificar que hay un path válido
 //
 void	check_errors(t_game *game)
 {
 	check_walls(game);
 	check_items(game);
+	get_player_position(game);
+	copying_map(game);
+	if (!check_path_to_exit(game, game->player_y, game->player_x))
+		ft_errors(game, ERROR_6);
 }
 
 // Función principal. Primero chequeamos argumentos y que el mapa que vamos
@@ -60,7 +64,6 @@ void	check_errors(t_game *game)
 int main(int argc, char **argv)
 {
 	int		i;
-	// int		j;
 	t_game	game;
 
 	i = 0;
@@ -73,25 +76,11 @@ int main(int argc, char **argv)
 		return (0);
 	ft_memset(&game, 0, sizeof(t_game));
 	reading_map(&game, argv);
-	// if (game.map != NULL)
-	// {
-	// 	while (game.map[i])
-	// 	{
-	// 		j = 0;
-	// 		while (game.map[i][j])
-	// 		{
-	// 			printf("%c", game.map[i][j]);
-	// 			j++;
-	// 		}
-	// 		i++;
-	// 	}
-	// }
 	check_errors(&game);
 	game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, (game.widthmap * 50), (game.heightmap * 50), "SoLong");
 	add_images_to_game(&game);
 	add_graphics_to_map(&game);
-	// mlx_key_hook (game.win_ptr, controls_game, &game);
 	mlx_hook(game.win_ptr, 2, 0, controls_game, &game);
 	mlx_hook(game.win_ptr, 17, 0, (void *)exit, 0);
 	mlx_loop(game.mlx_ptr);
