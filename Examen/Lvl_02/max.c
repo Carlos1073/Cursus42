@@ -15,19 +15,17 @@
 
 int max(int *tab, unsigned int len)
 {
+	int	i;
 	int result;
-	int i;
 	
-	result = tab[i];
-	i = 0;	
+	i = 0;
+	result = tab[i];	
 	if (!len)
 		return (0);
 	while(i < len)
 	{
 		if (result <  tab[i])
-		{
 			result = tab[i];
-		}
 		i++;
 	}
 	return result;
@@ -35,7 +33,7 @@ int max(int *tab, unsigned int len)
 
 int	main(void)
 {
-	int				data[5] = {19, 20, 8, 30, 9};
+	int				data[5] = {59, 40, 8, 30, 9};
 	unsigned int	len;
 	int				res;
 
