@@ -79,14 +79,4 @@ int	main(int argc, char **argv)
 	reading_map(&game, argv);
 	check_errors(&game);
 	init_game(&game);
-	/*
-	game.mlx_ptr = mlx_init();
-	game.win_ptr = mlx_new_window(game.mlx_ptr, (game.widthmap * 50),
-			(game.heightmap * 50), "SoLong");
-	add_images_to_game(&game);
-	add_graphics_to_map(&game);
-	mlx_hook(game.win_ptr, 2, 0, controls_game, &game);
-	mlx_hook(game.win_ptr, 17, 0, (void *)exit, 0);
-	mlx_loop(game.mlx_ptr);
-	*/
 }
