@@ -12,10 +12,9 @@
 
 #include "so_long.h" 
 
-// Esta función chequea qué tecla estamos presionando y ejecuta 
-// la función correspondiente
+// Esta función gestiona la destrucción de la ventana de presentación y crea 
+// la del juego
 //
-
 static int	loop_hook(t_game *game)
 {
 	if (game->start == 1)
@@ -24,7 +23,7 @@ static int	loop_hook(t_game *game)
 		mlx_destroy_window(game->mlx_ptr, game->screen_ptr);
 		game->mlx_ptr = mlx_init();
 		game->win_ptr = mlx_new_window(game->mlx_ptr, (game->widthmap * 50),
-			(game->heightmap * 50), "SoLong");
+				(game->heightmap * 50), "SoLong");
 		add_images_to_game(game);
 		add_graphics_to_map(game);
 		mlx_hook(game->win_ptr, 2, 0, controls_game, game);
@@ -35,6 +34,9 @@ static int	loop_hook(t_game *game)
 	return (0);
 }
 
+// Con esta función controlamos los eventos mientras tenemos la pantalla de  
+// presentación, de modo que si hay ESC o Space BAR, avancemos en el juego.
+//
 static int	start_game(int command, t_game *game)
 {
 	int	moving;
@@ -47,17 +49,22 @@ static int	start_game(int command, t_game *game)
 	return (0);
 }
 
+// Esta función inicia la ventana de presentación y utiliza las funciones
+// start_game y loop_hook para poder acceder a la pantalla del juego, donde
+// cargaremos el mapa.
+//
 void	init_game(t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	game->start = 0;
 	game->mlx_ptr = mlx_init();
 	game->screen_ptr = mlx_new_window(game->mlx_ptr, 700, 463, "SoLong");
 	game->initgame = mlx_xpm_file_to_image(game->mlx_ptr,
 			"sources/game_images/screen.xpm", &i, &j);
-	mlx_put_image_to_window(game->mlx_ptr, game->screen_ptr, game->initgame, 0, 0);
+	mlx_put_image_to_window(game->mlx_ptr, game->screen_ptr,
+		game->initgame, 0, 0);
 	mlx_hook(game->screen_ptr, 2, 0, start_game, game);
 	mlx_hook(game->screen_ptr, 17, 0, (void *)exit, game);
 	mlx_loop_hook(game->mlx_ptr, loop_hook, game);
