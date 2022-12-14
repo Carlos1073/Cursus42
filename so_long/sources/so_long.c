@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 17:22:39 by caguerre          #+#    #+#             */
-/*   Updated: 2022/11/02 17:22:41 by caguerre         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:00:50 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,25 @@ int	check_extension(char *filename)
 
 	len = ft_strlen(filename);
 	if (!ft_strnstr(&filename[len - 4], ".ber", 4))
-    {
-	    ft_printf("Error: This is not a BER file!\n");
+	{
+		ft_printf("Error: This is not a BER file!\n");
 		return (-1);
 	}
 	return (0);
 }
 
-// Esta función cierra la ventana, libera el mapa y sale del programa
+// Esta función cierra la ventana, libera tanto el puntero como el mapa
+// y sale del programa
 //
 int	exit_game(t_game *game)
 {
-	int	line;
+	int	i;
 
-	line = 0;
+	i = 0;
+	purge_images(game);
 	if (game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	free(game->mlx_ptr);
-	while (line < game->heightmap - 1)
-		free(game->map[line++]);
-	free(game->map);
+	ft_printf("\nExiting game...\n");
 	exit(0);
 }
 
@@ -53,15 +52,17 @@ void	check_errors(t_game *game)
 	check_walls(game);
 	check_items(game);
 	get_player_position(game);
-	copying_map(game);
+	game->map_tmp = copying_map(game);
+	if (!game->map_tmp)
+		ft_errors(game, ERROR_6);
 	if (!check_path_to_exit(game, game->player_y, game->player_x))
 		ft_errors(game, ERROR_6);
 }
 
 // Función principal. Primero chequeamos argumentos y que el mapa que vamos
-// a cargar no tenga errores básicos,  
+// a cargar no tenga errores básicos 
 //
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		i;
 	t_game	game;
@@ -77,11 +78,15 @@ int main(int argc, char **argv)
 	ft_memset(&game, 0, sizeof(t_game));
 	reading_map(&game, argv);
 	check_errors(&game);
+	init_game(&game);
+	/*
 	game.mlx_ptr = mlx_init();
-	game.win_ptr = mlx_new_window(game.mlx_ptr, (game.widthmap * 50), (game.heightmap * 50), "SoLong");
+	game.win_ptr = mlx_new_window(game.mlx_ptr, (game.widthmap * 50),
+			(game.heightmap * 50), "SoLong");
 	add_images_to_game(&game);
 	add_graphics_to_map(&game);
 	mlx_hook(game.win_ptr, 2, 0, controls_game, &game);
 	mlx_hook(game.win_ptr, 17, 0, (void *)exit, 0);
 	mlx_loop(game.mlx_ptr);
+	*/
 }
