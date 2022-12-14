@@ -15,29 +15,29 @@
 // Con esta función comprobamos qué tipo de casilla es la que va a ocupar el
 // jugador una vez se haya movido (E, 0 o C)
 //
-int  correct_move(t_game *game, int x, int y)
+int	correct_move(t_game *game, int x, int y)
 {
-    if (game->map[y][x] == 'E')
-    {
-        if (game->collectables != 0)
-            return (0);
-        ft_printf("\nYou have won the game!\n");
-            exit_game(game);
-    }
-    if (game->map[y][x] == '0')
-    {
-        game->map[y][x] = 'P';
-        game->player_x = x;
-        game->player_y = y;
-        game->counter++;
-    }
-    if (game->map[y][x] == 'C')
-    {
-        game->map[y][x] = 'P';
-        game->player_x = x;
-        game->player_y = y;
-        game->collectables--;
-        game->counter++;
-    }
-    return (1);
+	if (game->map[y][x] == 'E')
+	{
+		if (game->collectables != 0)
+			return (0);
+		ft_printf("\nYou have won the game!\n");
+		exit_game(game);
+	}
+	if (game->map[y][x] == '0')
+	{
+		game->map[y][x] = 'P';
+		game->player_x = x;
+		game->player_y = y;
+		game->counter++;
+	}
+	if (game->map[y][x] == 'C')
+	{
+		game->map[y][x] = 'P';
+		game->player_x = x;
+		game->player_y = y;
+		game->collectables--;
+		game->counter++;
+	}
+	return (1);
 }
