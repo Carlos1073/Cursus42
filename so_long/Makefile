@@ -35,7 +35,7 @@ INCLUDE = -I $(INC_DIR) -I $(LIBFT_DIR)$(INC_DIR) -I $(MINILIBX_DIR)$(INC_DIR) -
 
 HDRS = $(INC_DIR)so_long.h $(LIBS)
 
-NAME_SRCS = check_parameters.c errors.c so_long.c map.c images.c controls.c moving.c
+NAME_SRCS = check_parameters.c errors.c so_long.c map.c images.c controls.c moving.c check_path.c start_screen.c
 
 SRCS_NAME = $(addprefix $(SRCS_DIR), $(NAME_SRCS))
 
