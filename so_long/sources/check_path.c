@@ -15,14 +15,14 @@
 // Con esta función duplicamos el mapa para poder trabajar con él, ya que
 // haremos cambios varios y eso conllevaría que luego no funcione nada
 //
-void	**copying_map(t_game *game)
+char	**copying_map(t_game *game)
 {
 	int		i;
 	char	**copymap;
 
 	copymap = (char **)malloc(sizeof(char *) * (game->widthmap + 1));
 	if (!copymap)
-		free (copymap);
+		return (NULL);
 	i = 0;
 	while (game->map[i])
 	{
@@ -30,8 +30,7 @@ void	**copying_map(t_game *game)
 		i++;
 	}
 	copymap[i] = NULL;
-	game->map_tmp = copymap;
-	return (0);
+	return (copymap);
 }
 
 // Con esta función localizamos las coordenadas del player para comenzar
@@ -60,28 +59,6 @@ void	get_player_position(t_game *game)
 		y++;
 	}
 }
-
-// void	print_map(t_game *game)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	if (game->map_tmp != NULL)
-// 	{
-// 		while (game->map_tmp[i])
-// 		{
-// 			j = 0;
-// 			while (game->map_tmp[i][j])
-// 			{
-// 				printf("%c", game->map_tmp[i][j]);
-// 				j++;
-// 			}
-// 			i++;
-// 		}
-// 	}
-// printf("\n");
-// }
 
 // Función boleana para revisar todas las casillas en busca de un camino
 // que vaya del Player al Exit, para ello iremos restando los coleccionables
