@@ -128,13 +128,15 @@ int	controls_game(int command, t_game *game)
 		exit_game(game);
 	if (command == 13)
 		moving = move_up(game, command);
-	if (command == 1)
+	else if (command == 1)
 		moving = move_down(game, command);
-	if (command == 0)
+	else if (command == 0)
 		moving = move_left(game, command);
-	if (command == 2)
+	else if (command == 2)
 		moving = move_right(game, command);
 	if (moving)
 		add_graphics_to_map(game);
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 50, 10, 0XFFAA4D,
+		ft_strjoin("Movements:", ft_itoa(game->counter)));
 	return (1);
 }

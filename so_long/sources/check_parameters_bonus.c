@@ -91,7 +91,7 @@ void	check_items(t_game *game)
 		}
 		height++;
 	}
-	if (!(game->playercount == 1 && game->columncount >= 1
+	if (!(game->playercount == 1 && game->columncount > 1
 			&& game->exitcount == 1))
 		ft_errors(game, ERROR_2);
 }
