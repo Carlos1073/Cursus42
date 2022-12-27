@@ -28,6 +28,7 @@ int mount_string(char *str, int start, int end, int init)
 
 	c = ' ';
 	j = init;
+	flag = 0;
 	while (str[j])
 	{
 		if (str[j] == ' ' || str[j] == '\t')
@@ -63,10 +64,15 @@ int	main(int argc, char **argv)
 
 	str = argv[1];
 	i = 0;
+	if (argc == 1)
+	{
+		write(1, "\n", 1);
+		return (0);
+	}
 	while (argv[1][i] == ' ' || argv[1][i] == '\t')
 		i++;
 	start = i;
-	while (argv[1][i] >= 'a' && argv[1][i] <= 'z')
+	while (argv[1][i] >= 33 && argv[1][i] <= 127)
 	{
 		if (argv[1][i] != ' ' || argv[1][i] != '\t')
 			end = i;
@@ -74,7 +80,7 @@ int	main(int argc, char **argv)
 	}
 	while (argv[1][i] == ' ' || argv[1][i] == '\t')
 		i++;
-	init = i;	
+	init = i;
 	mount_string(str, start, end, init);
 	return (0);
 }
