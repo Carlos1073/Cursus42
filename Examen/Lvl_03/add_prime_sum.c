@@ -28,13 +28,21 @@ int	ft_atoi(char *str)
 	return (res);
 }
 
+// void	ft_putnbr(int num)
+// {
+// 	char	c;
+// 	if (num > 9)
+// 		ft_putnbr(num / 10);
+// 	c = (num % 10) + 48;
+// 	write(1, &c, 1);
+// }
 void	ft_putnbr(int num)
 {
-	char	c;
+	char	str[10] = "0123456789";
+
 	if (num > 9)
 		ft_putnbr(num / 10);
-	c = (num % 10) + 48;
-	write(1, &c, 1);
+	write(1, &str[num % 10], 1);
 }
 
 int	is_prime(int num)
