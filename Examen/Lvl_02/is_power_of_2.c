@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_power_of_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
+/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 15:38:57 by caguerre          #+#    #+#             */
-/*   Updated: 2022/07/20 15:38:59 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:00:19 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,5 @@
 
 int	    is_power_of_2(unsigned int n)
 {
-	int	i;
-
-	i = 1;
-	while (i <= n)
-	{
-		if (i == n)
-			return 1;
-		i *= 2;
-	}
-	return 0;
+	return (n > 0 && !(n & (n - 1)));
 }
