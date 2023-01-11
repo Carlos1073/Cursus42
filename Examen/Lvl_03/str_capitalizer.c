@@ -3,32 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   str_capitalizer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
+/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:27:46 by caguerre          #+#    #+#             */
-/*   Updated: 2022/09/28 12:47:55 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/01/11 16:39:03 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-// void	str_capitalizer(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (str[i] >= 'a' && 'z' >= str[i])
-// 		str[i] -= 32;
-// 	write(1, &str[i], 1);
-// 	while (str[++i])
-// 	{
-// 		if (str[i] >= 'A' && 'Z' >= str[i])
-// 			str[i] += 32;
-// 		if (str[i] >= 'a' && 'z' >=  str[i] && (str[i - 1] == ' ' || str[i - 1] == '\t'))
-// 			str[i] -= 32;
-// 		write(1, &str[i], 1);
-// 	}
-// }
 void	str_capitalizer(char *str)
 {
 	int	i;
