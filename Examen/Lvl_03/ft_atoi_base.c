@@ -2,45 +2,64 @@
 #include <stdio.h>
 #include <libc.h>
 
-char to_lower(char c)
+int	ft_iswhitespace(char const c)
 {
-    if (c >= 'A' && c <= 'Z')
-        return (c + ('a' - 'A'));
-    return (c);
+	if (c == ' ' || c == '\n' || c == '\t' || c == '\v' || c == '\r' || c == '\f')
+		return (1);
+	return (0);
 }
 
-int get_digit(char c, int digits_base)
+int	base(int c, int base)
 {
-	int	max_digit;
-	
-	if (digits_base <= 10)
-		max_digit = digits_base + '0';
-	else
-		max_digit = digits_base - 10 + 'a';
-	if (c >= '0' && c <= '9' && c <= max_digit)
-		return (c - '0');
-	else if (c >= 'a' && c <= 'f' && c <= max_digit)
-		return (10 + c - 'a');
-	else
-		return (-1);
+	char *str1 = "0123456789abcdef";
+	char *str2 = "0123456789ABCDEF";
+	int	i;
+
+	i = 0;
+	while (i < base)
+	{
+		if (c == str1[i] || c == str2[i])
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 int	ft_atoi_base(const char *str, int str_base)
 {
-    int	res;
-    int	negative;
-    int	digit;
+	int	number;
+	int	negative;
+	int	i;
 
-	res = 0;
-	negative = 1;
-	if (*str == '-')
-		negative = -1;
-		++str;
-	while ((digit = get_digit(to_lower(*str), str_base)) >= 0)
+	number = 0;
+	negative = 0;
+	i = 0;
+	while (ft_iswhitespace(str[i]))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		res = res * str_base;
-		res = res + (digit * negative);
-		++str;
+		if (str[i] == '-')
+			negative = 1;
+		i++;
 	}
-	return (res);
+	while (base(str[i], str_base) != -1)
+	{
+		number = number * str_base;
+		number = number  + base(str[i], st_base);
+		i++;
+	}
+	if (negative)
+		return (-number);
+	return (number);
 }
+
+// int	main(int ac, char **av)
+// {
+// 	int		number;
+// 	if (ac >= 3)
+// 	{
+// 		number = ft_atoi_base(av[1], atoi(av[2]));
+// 		printf("%d\n", number);
+// 	}
+// 	return (0);
+// }
