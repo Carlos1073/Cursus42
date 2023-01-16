@@ -1,12 +1,11 @@
 #include "list.h"
- #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 //int ascending(int a, int b)
 //{
 //	return (a <= b);
 //}
-
 
 t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
@@ -32,8 +31,6 @@ t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 	}
 	return(lst);
 }
-
-
 
 //int	main(void)
 //{
