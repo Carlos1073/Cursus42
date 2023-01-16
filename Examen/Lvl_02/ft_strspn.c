@@ -1,27 +1,21 @@
-#include <unistd.h>
-#include <stdio.h>
+#include "stdio.h"
+#include "string.h"
 
-char    ft_strchr(const char *s, int c)
+size_t  ft_strcspn(const char *s, const char *reject)
 {
-    while (*s != '\0')
-    {
-        if (*s == c)
-            return ((char*)s);
-        s++;
-    }
-    return (0);
-}
+	size_t	i = 0;
+	size_t	j = 0;
 
-size_t	ft_strspn(const char *s, const char *accept)
-{
-    size_t  i;
-
-    i = 0;
-    while (s[i] != '\0')
-    {
-        if (ft_strchr(accept, s[i]) == 0)
-            break;
-        i++;
-    }
-    return (i);
+	while (s[i])
+	{
+		while (reject[j])
+		{
+			if (reject[j] == s[i])
+				return (i);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (i);
 }
