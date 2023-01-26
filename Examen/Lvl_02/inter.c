@@ -8,7 +8,7 @@ int	main(int argc, char **argv)
 	int		k[256];
 
 	i = 0;
-	while (i<256)
+	while (i < 256)
 	{
 		k[i] = 1;
 		i++;
@@ -27,9 +27,9 @@ int	main(int argc, char **argv)
 		{
 			if (argv[2][j] == argv[1][i])
 			{
-				if (k[argv[1][i]])
+				if (k[(int)argv[1][i]])
 					write(1, &argv[2][j], 1);
-				k[argv[1][i]] = 0;
+				k[(int)argv[1][i]] = 0;
 			}
 
 			j++;
