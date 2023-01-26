@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_op.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
+/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:03:39 by caguerre          #+#    #+#             */
-/*   Updated: 2022/09/20 17:08:50 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:16:14 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,21 @@ int	main(int argc, char **argv)
 	char	operator;
 	int		res;
 
-	first = atoi(argv[1]);
-	second = atoi(argv[3]);
-	operator = argv[2][0];
 	if (argc == 4)
 	{
+		first = atoi(argv[1]);
+		second = atoi(argv[3]);
+		operator = argv[2][0];
+		res = 0;
 		if (operator == '+')
 			res = first + second;
-		else if (operator == '-')
+		if (operator == '-')
 			res = first - second;
-		else if (operator == '*')
+		if (operator == '*')
 			res = first * second;
-		else if (operator == '/')
+		if (operator == '/')
 			res = first / second;
-		else if (operator == '%')
+		if (operator == '%')
 			res = first % second;
 		printf("%d\n", res);
 	}
