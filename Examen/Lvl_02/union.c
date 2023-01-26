@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   union.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42barcel>       +#+  +:+       +#+        */
+/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 12:37:58 by caguerre          #+#    #+#             */
-/*   Updated: 2022/09/22 13:05:41 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:13:12 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ int	main(int argc, char **argv)
 	}
 	while (argv[1][i])
 	{
-		if (k[argv[1][i]])
+		if (k[(int)argv[1][i]])
 			write(1, &argv[1][i], 1);
-		k[argv[1][i]] = 0;
+		k[(int)argv[1][i]] = 0;
 	i++;
 	}
 	while (argv[2][j])
 	{
-		if (k[argv[2][j]])
+		if (k[(int)argv[2][j]])
 			write(1, &argv[2][j], 1);
-		k[argv[2][j]] = 0;
+		k[(int)argv[2][j]] = 0;
 	j++;
 	}
 	write(1, "\n", 1);
