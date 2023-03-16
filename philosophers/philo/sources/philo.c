@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:34:03 by caguerre          #+#    #+#             */
-/*   Updated: 2023/02/23 12:04:11 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:47:27 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ int main(int argc, char **argv)
 	table = (t_table *)malloc(sizeof(t_table));
 	if (!table)
 		return (0);
-	init_table(table, argv);
-	printf("Initialized table\n");
+	if (init_table(table, argv) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
 	init_mutex(table);
-	printf("Initialized mutex\n");
 	init_philosophers(table);
-	printf("Initialized philosophers\n");
 	launch_table(table);
 	return (0);
 }

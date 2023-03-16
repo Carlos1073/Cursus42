@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:53:36 by caguerre          #+#    #+#             */
-/*   Updated: 2023/02/23 12:17:16 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:52:30 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ void	manage_times(long long time, t_table *table)
 
 void	print_action(t_table *table, int id, char *text)
 {
-	pthread_mutex_lock(&(table->action_printing));
+	pthread_mutex_lock(&(table->printing));
 	if (!(table->dead_philos))
 	{
-		printf("%i ", get_time() - table->start_time);
-		printf("%i ", id + 1);
-		printf("%s\n", text);
+		printf(YELLOW"%lld ", get_time() - table->start_time);
+		printf(RED"%d ", id);
+		printf(GREEN"%s\n", text);
 	}
-	pthread_mutex_unlock(&(table->action_printing));
+	pthread_mutex_unlock(&(table->printing));
 	return ;
 }
