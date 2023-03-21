@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:49:55 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/21 12:47:12 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:35:42 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*philos_routine(void *void_philo)
 	philo = (t_philo *) void_philo;
 	table = philo->table;
 	if (philo->id % 2 == 0)
-		ft_usleep(philo->table->time_to_eat/2);
+		ft_usleep(philo->table->time_to_eat / 2);
 	while (table->dead_philos == 0)
 	{
 		if (table->n_meals > 0)
@@ -57,8 +57,6 @@ void	*philos_routine(void *void_philo)
 		manage_times(table->time_to_sleep, table);
 		print_action(table, philo->id, "The philosopher is thinking");
 		i++;
-		if (table->all_eaten)
-			break ;
 	}
 	return (0);
 }
@@ -66,34 +64,34 @@ void	*philos_routine(void *void_philo)
 int	check_dead_philos(t_table *table, t_philo *philo)
 {
 	int	i;
-
-		i = 0;
-		while (i < table->n_philos)
+	
+	i = 0;
+	while (i < table->n_philos)
+	{
+		pthread_mutex_lock(&(table->check_meal));
+		if (table->time_to_die < (long long int)((get_time() - table->start_time) - philo[i].t_last_meal))
 		{
-			pthread_mutex_lock(&(table->check_meal));
-			if (table->time_to_die < (long long int)((get_time() - table->start_time) - philo[i].t_last_meal))
-			{
-				print_action(table, i, "The philosopher is dead");
-				table->dead_philos = 1;
-				return (1);
-			}
-			i++;
-			pthread_mutex_unlock(&(table->check_meal));
-			usleep (100);
+			print_action(table, i, "The philosopher is dead");
+			table->dead_philos = 1;
+			return (1);
 		}
-		i = 0;
-		while (table->n_meals != -1 && i < table->n_philos)
+		i++;
+		pthread_mutex_unlock(&(table->check_meal));
+		ft_usleep (100);
+	}
+	i = 0;
+	while (table->n_meals != -1 && i < table->n_philos)
+	{
+		i++;
+		if (i >= table->n_philos && philo[i].x_eaten < table->n_meals)
+			i = 0;
+		if (philo[i].x_eaten >= table->n_meals)
 		{
-			i++;
-			if (i >= table->n_philos && philo[i].x_eaten < table->n_meals)
-				i = 0;
-			if (philo[i].x_eaten >= table->n_meals)
-			{
-				table->all_eaten = 1;
-				break ;
-			}
+			table->all_eaten = 1;
+			break ;
 		}
-		return (0);
+	}
+	return (0);
 }
 
 int	launch_table(t_table *table)
@@ -113,8 +111,13 @@ int	launch_table(t_table *table)
 	}
 	while (42)
 	{
-		if (check_dead_philos(table, table->philosophers) || table->all_eaten)
+		if (check_dead_philos(table, table->philosophers))
 			break ;
+		else if (table->all_eaten == 1)
+		{
+			printf("All have eaten\n");
+			break ;
+		}
 	}
 	exit_table(table, philo);
 	return (0);
