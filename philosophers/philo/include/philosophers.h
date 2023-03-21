@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:34:37 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/16 11:18:45 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:51:39 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/time.h>
+#include <stdbool.h>
 #include <limits.h>
 #include "colors.h"
+
+typedef long long t_ll;
 
 enum 
 {
@@ -33,16 +36,18 @@ ERROR_6,
 ERROR_7,
 };
 
+typedef struct s_table	t_table;
+
 typedef struct s_philo
 {
 	int				id;
-	int				x_eating;
-	int				eaten;
+	int				x_eaten;
+	int				need_eat;
 	long long		t_last_meal;
 	pthread_t		thread_id;
 	int				right_fork;
 	int				left_fork;
-	struct s_table	*table;
+	t_table			*table;
 }	t_philo;
 
 typedef struct s_table
@@ -54,12 +59,10 @@ typedef struct s_table
 	int				time_to_eat;
 	int				n_meals;
 	long long int	start_time;
-	int				all_eat;
-//    pthread_mutex_t *right_fork;
-//    pthread_mutex_t *left_fork;
-//    pthread_mutex_t mutex;
+	int				all_eaten;
+	pthread_mutex_t	death;
 	pthread_mutex_t	check_meal;
-	pthread_mutex_t	*fork_mutex;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	printing;
 	t_philo			*philosophers;
 }	t_table;
@@ -80,7 +83,7 @@ long long int	get_time(void);
 
 int		launch_table(t_table *table);
 void	*philos_routine(void *void_philo);
-void	check_dead_philos(t_table *table, t_philo *philo);
+int		check_dead_philos(t_table *table, t_philo *philo);
 void	philo_eats(t_philo *philo);
 void	exit_table(t_table *table, t_philo *philos);
 
@@ -90,7 +93,9 @@ int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
 void		*ft_calloc(size_t count, size_t size);
 void		manage_times(long long time, t_table *table);
-long long	time_difference(long long past, long long actual);
+// long long	time_difference(long long past, long long actual);
 void		print_action(t_table *table, int id, char *text);
+void		do_sleep_cycle(t_ll tslp);
+void		ft_usleep(int n);
 
 #endif

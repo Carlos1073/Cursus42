@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:53:36 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/15 15:52:30 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:29:11 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,3 +77,15 @@ void	print_action(t_table *table, int id, char *text)
 	pthread_mutex_unlock(&(table->printing));
 	return ;
 }
+
+// bool	only_one_philo(t_philo *philo)
+// {
+// 	if (philo->table->n_philos == 1)
+// 	{
+// 		pthread_mutex_lock(&philo->table->forks[philo->left_fork]);
+// 		print_action(philo->table, philo->id, "The philosopher has taken a fork");
+// 		ft_usleep(philo->table->time_to_die + 1);
+// 		return (true);
+// 	}
+// 	return (false);
+// }

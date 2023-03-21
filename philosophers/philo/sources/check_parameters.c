@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:36:55 by caguerre          #+#    #+#             */
-/*   Updated: 2023/02/15 16:30:39 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:29:23 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,15 @@ int	check_parameters(int argc, char **argv)
 		i += 1;
 	}
 	return (EXIT_SUCCESS);
+}
+
+void	ft_usleep(int n)
+{
+	long long int	i;
+
+	i = get_time();
+	while (n > get_time() - i)
+	{
+		usleep(n / 2);
+	}
 }

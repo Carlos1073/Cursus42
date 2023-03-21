@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:31:39 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/15 17:05:40 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:47:15 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ int	init_mutex(t_table *table)
 	int	i;
 
 	i = 0;
-	table->fork_mutex = malloc(sizeof(pthread_mutex_t) * table->n_philos);
-	if (!table->fork_mutex)
+	table->forks = malloc(sizeof(pthread_mutex_t) * table->n_philos);
+	if (!table->forks)
 		return (EXIT_FAILURE);
 	while (i < table->n_philos)
 	{
-		pthread_mutex_init(&table->fork_mutex[i], NULL);
+		pthread_mutex_init(&table->forks[i], NULL);
 		i++;
 	}
-	pthread_mutex_init(&table->fork_mutex[i], NULL);
+	pthread_mutex_init(&table->forks[i], NULL);
 	pthread_mutex_init(&table->printing, NULL);
 	return (EXIT_SUCCESS);
 }
@@ -64,7 +64,7 @@ int	init_philosophers(t_table *table)
 	while (i < table->n_philos)
 	{
 		table->philosophers[i].id = i + 1;
-		table->philosophers[i].x_eating = 0;
+		table->philosophers[i].x_eaten = 0;
 		table->philosophers[i].left_fork = i;
 		table->philosophers[i].right_fork = i - 1;
 		table->philosophers[i].t_last_meal = 0;
