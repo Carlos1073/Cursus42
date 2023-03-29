@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:34:37 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/21 11:51:39 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:35:47 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void		*ft_calloc(size_t count, size_t size);
 void		manage_times(long long time, t_table *table);
 // long long	time_difference(long long past, long long actual);
 void		print_action(t_table *table, int id, char *text);
+void		print_action_death(t_table *table, int id, char *text);
 void		do_sleep_cycle(t_ll tslp);
 void		ft_usleep(int n);
 
