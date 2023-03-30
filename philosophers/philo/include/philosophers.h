@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:34:37 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/29 11:35:47 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:43:46 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_table
 	pthread_mutex_t	check_meal;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	printing;
+	pthread_mutex_t	pcreate;
 	t_philo			*philosophers;
 }	t_table;
 
@@ -93,7 +94,7 @@ int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
 void		*ft_calloc(size_t count, size_t size);
 void		manage_times(long long time, t_table *table);
-// long long	time_difference(long long past, long long actual);
+long long	time_difference(long long past, long long actual);
 void		print_action(t_table *table, int id, char *text);
 void		print_action_death(t_table *table, int id, char *text);
 void		do_sleep_cycle(t_ll tslp);
