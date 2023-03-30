@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:31:39 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/16 16:47:15 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/30 12:47:53 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	init_table(t_table *table, char **argv)
 {
 	table->dead_philos = 0;
 	table->n_philos = ft_atoi(argv[1]);
-	printf("N_philos: %i\n", table->n_philos);
 	table->time_to_die = ft_atoi(argv[2]);
 	table->time_to_eat = ft_atoi(argv[3]);
 	table->time_to_sleep = ft_atoi(argv[4]);
@@ -31,7 +30,6 @@ int	init_table(t_table *table, char **argv)
 	}
 	else
 	 	table->n_meals = -1;
-	printf("N_MEALS: %d\n", table->n_meals);
 	return (EXIT_SUCCESS);
 }
 
@@ -50,6 +48,7 @@ int	init_mutex(t_table *table)
 	}
 	pthread_mutex_init(&table->forks[i], NULL);
 	pthread_mutex_init(&table->printing, NULL);
+	pthread_mutex_init(&table->pcreate, NULL);
 	return (EXIT_SUCCESS);
 }
 
@@ -69,6 +68,7 @@ int	init_philosophers(t_table *table)
 		table->philosophers[i].right_fork = i - 1;
 		table->philosophers[i].t_last_meal = 0;
 		table->philosophers[i].table = table;
+		table->philosophers[i].t_last_meal = table->start_time;
 		i++;
 	}
 	table->philosophers[0].right_fork = i - 1;
