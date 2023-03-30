@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:31:39 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/30 12:47:53 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:51:25 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	init_mutex(t_table *table)
 	}
 	pthread_mutex_init(&table->forks[i], NULL);
 	pthread_mutex_init(&table->printing, NULL);
-	pthread_mutex_init(&table->pcreate, NULL);
 	return (EXIT_SUCCESS);
 }
 

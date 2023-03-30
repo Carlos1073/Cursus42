@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:49:55 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/30 13:09:02 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:40:04 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	philo_eats(t_philo *philo)
 	ft_usleep(table->time_to_eat);
 	philo->t_last_meal = get_time() - philo->table->start_time;
 	pthread_mutex_unlock(&(table->check_meal));
-	manage_times(table->time_to_eat, table);
 	(philo->x_eaten)++;
 	pthread_mutex_unlock(&(table->forks[philo->left_fork]));
 	pthread_mutex_unlock(&(table->forks[philo->right_fork]));
@@ -67,7 +66,6 @@ void	*philos_routine(void *void_philo)
 		{
 			print_action(table, philo->id, "The philosopher is sleeping");
 			ft_usleep(table->time_to_sleep);
-			manage_times(table->time_to_sleep, table);
 			print_action(table, philo->id, "The philosopher is thinking");
 		}
 		i++;
@@ -115,20 +113,16 @@ int	launch_table(t_table *table)
 
 	i = 0;
 	philo = table->philosophers;
-	// table->start_time = get_time();
-	table->start_time = get_time() + (table->n_philos * 42);
-	pthread_mutex_lock(&(table->pcreate));
+	table->start_time = get_time() + (table->n_philos * 10);
 	while (i < table->n_philos)
 	{
-		// table->philosophers[i].t_last_meal = table->start_time;
+		table->philosophers[i].t_last_meal = table->start_time;
 		if (pthread_create(&(philo[i].thread_id), NULL, philos_routine,
 				&(philo[i])))
 			return (1);
 		philo[i].t_last_meal = get_time();
 		i++;
 	}
-	ft_usleep(table->n_philos * 2);
-	pthread_mutex_unlock(&(table->pcreate));
 	while (42)
 	{
 		if (check_dead_philos(table, table->philosophers))
