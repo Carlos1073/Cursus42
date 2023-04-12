@@ -6,17 +6,17 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:34:03 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/15 15:47:27 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/04/12 17:25:59 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_table    *table;
-	
-	if(argc != 5 && argc != 6)
+	t_table	*table;
+
+	if (argc != 5 && argc != 6)
 	{
 		ft_errors(ERROR_0);
 		return (EXIT_FAILURE);
@@ -31,5 +31,6 @@ int main(int argc, char **argv)
 	init_mutex(table);
 	init_philosophers(table);
 	launch_table(table);
+	free(table);
 	return (0);
 }
