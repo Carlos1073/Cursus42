@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:49:55 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/30 15:40:04 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:01:18 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	check_dead_philos(t_table *table, t_philo *philo)
 		if (table->time_to_die < (long long int)((get_time()
 					- table->start_time) - philo[i].t_last_meal))
 		{
-			print_action_death(table, i, "The philosopher is dead");
+			print_action_death(table, philo->id, "The philosopher is dead");
 			table->dead_philos = 1;
 			return (1);
 		}
@@ -95,8 +95,6 @@ int	check_dead_philos(t_table *table, t_philo *philo)
 	while (table->n_meals != -1 && i < table->n_philos)
 	{
 		i++;
-		if (i >= table->n_philos && philo[i].x_eaten < table->n_meals)
-			i = 0;
 		if (philo[i].x_eaten == table->n_meals)
 		{
 			table->all_eaten = 1;
