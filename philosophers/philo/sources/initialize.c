@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:31:39 by caguerre          #+#    #+#             */
-/*   Updated: 2023/03/30 11:51:25 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:38:19 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	init_table(t_table *table, char **argv)
 		}
 	}
 	else
-	 	table->n_meals = -1;
+		table->n_meals = -1;
 	return (EXIT_SUCCESS);
 }
 
@@ -76,7 +76,7 @@ int	init_philosophers(t_table *table)
 
 long long int	get_time(void)
 {
-	static struct	timeval	t;
+	static struct timeval	t;
 
 	gettimeofday(&t, NULL);
 	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));

@@ -36,7 +36,7 @@ DEP_NAME = $(addsuffix .d, $(basename $(OBJS_NAME)))
 # -------------------------------- COMPILATE --------------------------------- #
 
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g
 RM		= rm -f
 AR		= ar -rcs
 CP		= cp -f

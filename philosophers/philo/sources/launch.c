@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:49:55 by caguerre          #+#    #+#             */
-/*   Updated: 2023/04/12 17:27:47 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:15:38 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ void	think_and_sleep(t_philo	*philo, t_table	*table)
 	ft_usleep(table->time_to_sleep);
 	print_action(table, philo->id, "The philosopher is thinking");
 }
-
-// int	only_one_philo(t_philo	*philo, t_table	*table)
-// {
-// 	if (philo->table->n_philos == 1)
-// 	{
-// 		pthread_mutex_lock(&(table->forks[philo->left_fork]));
-// 		print_action(table, philo->id, "The philosopher has taken the left fork");
-// 		ft_usleep(philo->table->time_to_die + 1);
-// 		philo->t_last_meal = get_time() - philo->table->start_time - philo->table->time_to_die;
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 void	philo_eats(t_philo *philo)
 {
@@ -53,11 +40,9 @@ void	philo_eats(t_philo *philo)
 
 void	*philos_routine(void *void_philo)
 {
-	int		i;
 	t_philo	*philo;
 	t_table	*table;
 
-	i = 0;
 	philo = (t_philo *)void_philo;
 	table = philo->table;
 	ft_usleep(table->start_time - get_time());
@@ -78,7 +63,6 @@ void	*philos_routine(void *void_philo)
 			philo_eats(philo);
 		if (philo->x_eaten != table->n_meals)
 			think_and_sleep(philo, table);
-		i++;
 	}
 	return (0);
 }
@@ -93,7 +77,7 @@ int	check_dead_philos(t_table *table, t_philo *philo)
 		if (table->n_philos == 1)
 			i = 1;
 		if (table->time_to_die < (long long int)((get_time()
-					- table->start_time) - philo[i].t_last_meal))
+				- table->start_time) - philo[i].t_last_meal))
 		{
 			print_action_death(table, philo->id, "The philosopher is dead");
 			table->dead_philos = 1;
