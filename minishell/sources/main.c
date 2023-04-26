@@ -6,7 +6,7 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/04/26 16:49:29 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:08:11 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void exit_msl(t_data *data, int gbl)
     if (data)
     {
         if (data->cmd && data->cmd->fds)
-            close_fds(data->cmd, true);
-        free_data(data, true);
+            close_fds(data->cmd, true); //pendiente
+        free_data(data, true); //pendiente 
     }
     exit (gbl);
 }
@@ -59,11 +59,11 @@ int main(int argc, char **argv, char **env)
 
     ft_memset(&data, 0, sizeof(t_data));
     if (!check_params(&data, argc, argv))
-        exit_shell(NULL, EXIT_FAILURE);
+        exit_msl(NULL, EXIT_FAILURE); //pendiente
     if (data.interactive == true)
-        msl_interact(&data);
+        msl_interact(&data); //pendiente
     else
-        msl_non_interact(&data);
+        msl_non_interact(&data); //pendiente
     exit_msl(&data, gbl_exit_code);
     return (0);
 }
